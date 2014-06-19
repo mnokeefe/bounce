@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <title>eWasp Prototype Server</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"></link>
+  </head>
+  <body>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-default js-stress-none">None</button>
+      <button type="button" class="btn btn-default js-stress-moderate">Moderate</button>
+      <button type="button" class="btn btn-default js-stress-severe">Severe</button>
+    </div>
+    <div id="stress-level"></div>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+
+      $( ".js-stress-none" ).click(function() {
+        socket.emit('no stress');
+      });
+
+      $( ".js-stress-moderate" ).click(function() {
+        socket.emit('moderate stress');
+      });
+
+      $( ".js-stress-severe" ).click(function() {
+        socket.emit('severe stress');
+      });
+    </script>
+  </body>
+</html>
