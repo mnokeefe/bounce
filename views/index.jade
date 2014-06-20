@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  h1= title
+  form.username-form(action='')
+    label Username
+    input(type='text')
+    input.btn.btn-primary(type='submit', value='Join')
+
+  section#ui.ui
+    span#username
+    span.js-stress-indicator Everything's OK
+
+    #weather.weather
+      #no-stress
+      #moderate-stress
+      #severe-stress
+      .location
+
+
+block scripts
+  script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js')
+  script(src='js/client.js')
+  script(src='js/weather.js')

@@ -1,36 +1,26 @@
 <!doctype html>
 <html>
   <head>
-    <title>eWasp Prototype Server</title>
+    <title>eWasp Prototype Client</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="assets/css/client.css"></link>
   </head>
   <body>
 
-    <div class="btn-group">
-      <button type="button" class="btn btn-default js-stress-none">None</button>
-      <button type="button" class="btn btn-default js-stress-moderate">Moderate</button>
-      <button type="button" class="btn btn-default js-stress-severe">Severe</button>
-    </div>
-    <div id="stress-level"></div>
+    <h1>Crew Member: <span id="username"></span></h1>
+    <form class="username-form" method="post" action="">
+      <label>Username</label>
+      <input type="text" />
+      <input type="submit" value="Join" class="btn btn-primary"/>
+    </form>
 
-
+    <section id="ui" class="ui">
+      <span class="js-stress-indicator">Everything's OK</span>
+    </section>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      var socket = io();
-
-      $( ".js-stress-none" ).click(function() {
-        socket.emit('no stress');
-      });
-
-      $( ".js-stress-moderate" ).click(function() {
-        socket.emit('moderate stress');
-      });
-
-      $( ".js-stress-severe" ).click(function() {
-        socket.emit('severe stress');
-      });
-    </script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="assets/js/client.js"></script>
   </body>
 </html>
