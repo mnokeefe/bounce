@@ -1,0 +1,33 @@
+/* Hide UI initially when using username entry form
+.ui {
+  display: none;
+}
+*/
+
+$white: #ffffff;
+$blue: #1b8fb4;
+
+* {
+  box-sizing: border-box;
+}
+
+.weather {
+  padding: 0;
+  margin: 0;
+  color: $white;
+}
+
+.weather__item {
+  background: $blue;
+  border: 0.5rem solid $white;
+  display: inline-block;
+  text-align: center;
+  width: 20%;
+  img {
+    width: 100%;
+  }
+}
+
+.weather__item--simple {
+  width: 100%;
+}

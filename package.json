@@ -6,5 +6,21 @@
     "express": "~4.4.3",
     "socket.io": "~1.0.5",
     "jade": "*"
+  },
+  "devDependencies": {
+    "gulp": "",
+    "gulp-sass": "",
+    "gulp-pixrem": "",
+    "gulp-autoprefixer": "",
+    "gulp-minify-css": "",
+    "gulp-jshint": "",
+    "gulp-imagemin": "",
+    "gulp-rename": "",
+    "gulp-clean": "",
+    "gulp-concat": "",
+    "gulp-notify": "",
+    "gulp-cache": "",
+    "gulp-livereload": "",
+    "gulp-uglify": ""
   }
 }

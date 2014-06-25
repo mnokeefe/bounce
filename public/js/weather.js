@@ -6,9 +6,6 @@ $(function(){
     var DEG = 'c';  // c for celsius, f for fahrenheit
 
     var weatherDiv = $('#weather'),
-        noStress = $('#no-stress'),
-        moderateStress = $('#moderate-stress'),
-        severeStress = $('#severe-stress'),
         location = $('.location');
 
     // Does this browser support geolocation?
@@ -86,21 +83,12 @@ $(function(){
 
     function addWeather(icon, day, condition){
 
-        var markupA = '<li>'+
+        var markup = '<li class="weather__item">'+
             '<img src="/images/icons/'+ icon +'.png" />'+
             ' <p class="day">'+ day +'</p> <p class="cond">'+ condition +
             '</p></li>';
 
-        var markupB = '<li>'+
-            '<img src="/images/icons/'+ icon +'.png" />';
-
-        var markupC = '<li>'+
-            '<p class="cond">'+ condition +
-            '</p></li>';
-
-        noStress.append(markupA);
-        moderateStress.append(markupB);
-        severeStress.append(markupC);
+        weatherDiv.append(markup);
     }
 
     /* Error handling functions */

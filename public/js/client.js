@@ -18,22 +18,18 @@ var socket = io.connect();
 
 // var stress_ui = $("#ui");
 
+
+
 // Receive stress signals
 socket.on('no stress', function() {
   $('.js-stress-indicator').text("Everything's OK");
-  $('#no-stress').show();
-  $('#moderate-stress').hide();
-  $('#severe-stress').hide();
+  $('#weather').attr('data-stress', 'ok');
 });
 socket.on('moderate stress', function() {
   $('.js-stress-indicator').text('Alright, calm down a bit there mate');
-  $('#no-stress').hide();
-  $('#moderate-stress').show();
-  $('#severe-stress').hide();
+  $('#weather').attr('data-stress', 'moderate');
 });
 socket.on('severe stress', function() {
   $('.js-stress-indicator').text('STRESSED! STRESSED!');
-  $('#no-stress').hide();
-  $('#moderate-stress').hide();
-  $('#severe-stress').show();
+  $('#weather').attr('data-stress', 'severe');
 });
