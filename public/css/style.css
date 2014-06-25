@@ -1,6 +1,8 @@
+/* Hide UI initially when using username entry form
 .ui {
   display: none;
 }
+*/
 
 .weather {
   background: #1b8fb4;

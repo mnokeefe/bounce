@@ -9,13 +9,13 @@ $(function(){
         noStress = $('#no-stress'),
         moderateStress = $('#moderate-stress'),
         severeStress = $('#severe-stress'),
-        location = $('p.location');
+        location = $('.location');
 
     // Does this browser support geolocation?
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
     }
-    else{
+    else {
         showError("Your browser does not support Geolocation!");
     }
 
