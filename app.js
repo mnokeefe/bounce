@@ -25,22 +25,6 @@ srv.listen(3000, function() {
 // SOCKETS
 ////////////////////////////////////////////////////////////////////////////////
 
-// var crew = io.of('/crew');
-
-// crew.on('connection', function(socket){
-
-//   socket.join('crew');
-
-// });
-
-
-
-
-
-
-// STRESS LEVELS
-////////////////////////////////////////////////////////////////////////////////
-
 io.on('connection', function(socket) {
 
   // CONNECT
@@ -52,10 +36,11 @@ io.on('connection', function(socket) {
   // Add new clients to the list
   socket.on('add-user', function(data) {
     clients[data.username] = {
-      "socket": socket.id
+      'socket': socket.id
     };
 
-    // Confirm the connection on server log
+    io.emit('add crewmember', { name: data.username });
+
     console.log(data.username + ' connected');
   });
 
@@ -67,12 +52,18 @@ io.on('connection', function(socket) {
     for(var name in clients) {
       if(clients[name].socket === socket.id) {
         console.log(name + ' disconnected');
+
+        // Delete from Stress Faker
+        io.emit('delete crewmember', { name: name });
+
         delete clients[name];
         break;
       }
     }
   });
 
+  // STRESS! STRESS!
+  //////////////////////////////////////////////////////////////////////////////
 
   socket.on('no stress', function() {
     console.log('no stress');
@@ -87,7 +78,6 @@ io.on('connection', function(socket) {
   socket.on('severe stress', function() {
     console.log('STRESSED! STRESSED!');
     io.emit('severe stress');
-    // io.to('crew').emit('severe stress');
   });
 
 });
