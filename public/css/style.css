@@ -1,26 +1,29 @@
-/* Hide UI initially when using username entry form
-.ui {
-  display: none;
-}
-*/
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
 .weather {
   padding: 0;
   margin: 0;
   color: #ffffff; }
 
 .weather__item {
-  background: #1b8fb4;
   border: 0.5rem solid #ffffff;
   display: inline-block;
-  text-align: center;
-  width: 20%; }
+  padding-top: 2rem;
+  text-align: center; }
   .weather__item img {
-    width: 100%; }
+    width: 80%; }
 
-.weather__item--simple {
-  width: 100%; }
+[data-stress="ok"] .weather__item {
+  width: 20%;
+  background: #1b8fb4; }
+
+[data-stress="moderate"] .weather__item {
+  width: 50%;
+  background: #146d88; }
+
+[data-stress="severe"] .weather__item {
+  width: 100%;
+  background: #0e495b; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }

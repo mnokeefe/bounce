@@ -3,7 +3,7 @@
 $(function(){
 
     /* Configuration */
-    var DEG = 'c';  // c for celsius, f for fahrenheit
+    var DEG = 'C';  // c for celsius, f for fahrenheit
 
     var weatherDiv = $('#weather'),
         location = $('.location');
@@ -112,7 +112,7 @@ $(function(){
 
     function convertTemperature(kelvin){
         // Convert the temperature to either Celsius or Fahrenheit:
-        return Math.round(DEG == 'c' ? (kelvin - 273.15) : (kelvin*9/5 - 459.67));
+        return Math.round(DEG == 'C' ? (kelvin - 273.15) : (kelvin*9/5 - 459.67));
     }
 
     function showError(msg){
