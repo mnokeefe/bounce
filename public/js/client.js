@@ -1,24 +1,20 @@
-// var socket = io();
-var socket = io.connect();
+// var socket = io('/crew');
+var socket = io();
+var stress_ui = $("#ui");
 
+// Add a username
+$(".username-form").on("submit", function(){
 
-// // Add a username
-// $(".username-form").on("submit", function(){
+  // Tell the server about it
+  var username = $(this).children("input").val();
+  socket.emit("add-user", {"username": username});
 
-//   // Tell the server about it
-//   var username = $(this).children("input").val();
-//   socket.emit("add-user", {"username": username});
-
-//   // Remove the login form and show UI
-//   $(this).remove();
-//   $("#username").text(username + ': ');
-//   stress_ui.show();
-//   return false;
-// });
-
-// var stress_ui = $("#ui");
-
-
+  // Remove the login form and show UI
+  $(this).remove();
+  $("#username").text(username);
+  stress_ui.show();
+  return false;
+});
 
 // Receive stress signals
 socket.on('no stress', function() {

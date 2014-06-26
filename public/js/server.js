@@ -16,7 +16,14 @@ $('button[data-stress="severe"]').click(function() {
 
 
 // TODO: Build the user list automatically
-socket.on('add-user', function(data) {
-  $('.js-crew-member').text(data.username);
-  console.log('received: ' + data.username);
+// socket.on('add-user', function(data) {
+//   $('.js-crew-member').text(data.username);
+//   console.log('received: ' + data.username);
+// });
+
+socket.on('add-user', function(data){
+  $('.js-crew-member').append($('<li>', {
+    'text': data.content
+  }));
+  console.log('received: ' + data.content);
 });

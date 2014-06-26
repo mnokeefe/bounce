@@ -5,5 +5,5 @@ exports.index = function(req, res){
 
 // Server
 exports.server = function(req, res){
-  res.render('server', { title: 'Server' });
+  res.render('server', { title: 'Stress Faker' });
 };

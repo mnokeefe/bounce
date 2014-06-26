@@ -17,6 +17,9 @@
 
 [data-stress="ok"] {
   .weather__item {
+    img {
+      display: none;
+    }
     width: 20%;
     background: $blue;
   }
