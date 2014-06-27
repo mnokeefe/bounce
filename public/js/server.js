@@ -50,24 +50,14 @@ socket.on('delete crewmember', function(data) {
 // STRESS! STRESS!
 ////////////////////////////////////////////////////////////////////////////////
 
-
-// Target specific crew members
 $('body').on('click', 'button[data-stress="none"]', function () {
   socket.emit('no stress', { name: $(this).closest('tr').data('name') });
-
-  console.log('No stress to: ' + $(this).closest('tr').data('name'));
 });
 
-
-// Working on the generic buttons
-// $('button[data-stress="none"]').click(function() {
-//   socket.emit('no stress');
-// });
-
-$('button[data-stress="moderate"]').click(function() {
-  socket.emit('moderate stress');
+$('body').on('click', 'button[data-stress="moderate"]', function () {
+  socket.emit('moderate stress', { name: $(this).closest('tr').data('name') });
 });
 
-$('button[data-stress="severe"]').click(function() {
-  socket.emit('severe stress');
+$('body').on('click', 'button[data-stress="severe"]', function () {
+  socket.emit('severe stress', { name: $(this).closest('tr').data('name') });
 });

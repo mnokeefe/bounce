@@ -17,23 +17,23 @@ app.get('/', routes.index);
 app.get('/server', routes.server);
 
 // Server
-srv.listen(3000, function() {
-  console.log('listening on port 3000');
+srv.listen(3011, function() {
+  console.log('listening on port 3011');
 });
 
 
 // SOCKETS
 ////////////////////////////////////////////////////////////////////////////////
 
+// Create client list
+var clients = {};
+
 io.on('connection', function(socket) {
 
   // CONNECT
+  // Add connections to the clients list
   //////////////////////////////////////////////////////////////////////////////
 
-  // Create client list
-  var clients = [];
-
-  // Add new clients to the list
   socket.on('add-user', function(data) {
     clients[data.username] = {
       'socket': socket.id
@@ -45,15 +45,15 @@ io.on('connection', function(socket) {
   });
 
   // DISCONNECT
+  // Remove disconnected sockets from the clients list
   //////////////////////////////////////////////////////////////////////////////
 
-  // Removing the socket on disconnect
   socket.on('disconnect', function() {
     for(var name in clients) {
       if(clients[name].socket === socket.id) {
         console.log(name + ' disconnected');
 
-        // Delete from Stress Faker
+        // Delete from Stress Faker UI
         io.emit('delete crewmember', { name: name });
 
         delete clients[name];
@@ -63,31 +63,33 @@ io.on('connection', function(socket) {
   });
 
   // STRESS! STRESS!
+  // Send messages from Stress Faker to correct connection
   //////////////////////////////////////////////////////////////////////////////
 
   socket.on('no stress', function(data) {
-    // console.log('no stress', data.name);
-
-    for(var name in clients) {
-      if(clients[name].socket === socket.id) {
-
-        io.emit('no stress', { name: name });
-
-        console.log(name + ' no stress');
-        delete clients[name];
-        break;
-      }
+    console.log(data.name + ': Low stress');
+    if (clients[data.name]) {
+      socket.to(clients[data.name].socket).emit('no stress');
+    } else {
+      console.log('User does not exist: ' + data.name); 
     }
   });
 
-  socket.on('moderate stress', function() {
-    console.log('moderate stress');
-    io.emit('moderate stress');
+  socket.on('moderate stress', function(data) {
+    console.log(data.name + ': Moderate stress');
+    if (clients[data.name]) {
+      socket.to(clients[data.name].socket).emit('moderate stress');
+    } else {
+      console.log('User does not exist: ' + data.name); 
+    }
   });
 
-  socket.on('severe stress', function() {
-    console.log('STRESSED! STRESSED!');
-    io.emit('severe stress');
+  socket.on('severe stress', function(data) {
+    console.log(data.name + ': High stress');
+    if (clients[data.name]) {
+      socket.to(clients[data.name].socket).emit('severe stress');
+    } else {
+      console.log('User does not exist: ' + data.name); 
+    }
   });
-
 });
