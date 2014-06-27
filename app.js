@@ -65,9 +65,19 @@ io.on('connection', function(socket) {
   // STRESS! STRESS!
   //////////////////////////////////////////////////////////////////////////////
 
-  socket.on('no stress', function() {
-    console.log('no stress');
-    io.emit('no stress');
+  socket.on('no stress', function(data) {
+    // console.log('no stress', data.name);
+
+    for(var name in clients) {
+      if(clients[name].socket === socket.id) {
+
+        io.emit('no stress', { name: name });
+
+        console.log(name + ' no stress');
+        delete clients[name];
+        break;
+      }
+    }
   });
 
   socket.on('moderate stress', function() {

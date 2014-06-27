@@ -1,39 +1,68 @@
 var socket = io();
 
-// ADD CREW
+// ADD CREW ON CONNECTION
 ////////////////////////////////////////////////////////////////////////////////
 
 socket.on('add crewmember', function(data) {
-  // $('.js-crew-member').text(data.name);
   $("#crewmembers").find('tbody')
     .append($('<tr>')
-      .append($('<td class="js-crew-member">')
+      .data('name', data.name)
+      .append($('<td>')
         .text(data.name)
       )
       .append($('<td>')
         .text('OK')
       )
-      .append($('<td><div class="btn-group"><button type="button" data-stress="none" class="btn btn-default">None</button><button type="button" data-stress="moderate" class="btn btn-default">Moderate</button><button type="button" data-stress="severe" class="btn btn-default">Severe</button></div></td>')
+      .append($('<td>')
+        .append($('<div class="btn-group">')
+        )
+        .append($('<button type="button" class="btn btn-default">')
+          .attr({
+            'data-stress': 'none'
+          })
+          .text('None')
+        )
+        .append($('<button type="button" class="btn btn-default">')
+          .attr({
+            'data-stress': 'moderate'
+          })
+          .text('Moderate')
+        )
+        .append($('<button type="button" class="btn btn-default">')
+          .attr({
+            'data-stress': 'severe'
+          })
+          .text('Severe')
+        )
       )
     );
 });
 
-
-
-
-// REMOVE CREW
+// REMOVE CREW ON DISCONNECT
 ////////////////////////////////////////////////////////////////////////////////
 
 socket.on('delete crewmember', function(data) {
-  $('.js-crew-member').text(data.name + ' gone');
+  $('#crewmembers tr').filter(function(){
+    return $(this).data('name') === data.name
+  }).remove();
 });
 
 // STRESS! STRESS!
 ////////////////////////////////////////////////////////////////////////////////
 
-$('button[data-stress="none"]').click(function() {
-  socket.emit('no stress');
+
+// Target specific crew members
+$('body').on('click', 'button[data-stress="none"]', function () {
+  socket.emit('no stress', { name: $(this).closest('tr').data('name') });
+
+  console.log('No stress to: ' + $(this).closest('tr').data('name'));
 });
+
+
+// Working on the generic buttons
+// $('button[data-stress="none"]').click(function() {
+//   socket.emit('no stress');
+// });
 
 $('button[data-stress="moderate"]').click(function() {
   socket.emit('moderate stress');

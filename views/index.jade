@@ -3,9 +3,9 @@ extends layout
 block content
   h1= title
   //- Username entry form
-  form.username-form(action='')
+  form.form-group.username-form(action='')
     label Username
-    input(type='text')
+    input.form-control(type='text')
     input.btn.btn-primary(type='submit', value='Join')
 
   section#ui.ui
