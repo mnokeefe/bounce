@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.get('/', routes.index);
 app.get('/server', routes.server);
+app.get('/weather', routes.weather);
 
 // Server
 srv.listen(3011, function() {
@@ -42,6 +43,7 @@ io.on('connection', function(socket) {
     io.emit('add crewmember', { name: data.username });
 
     console.log(data.username + ' connected');
+    console.log(clients);
   });
 
   // DISCONNECT

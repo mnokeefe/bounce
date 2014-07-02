@@ -54,6 +54,9 @@ $(function(){
                 // Add the location to the page
                 location.html(city+', <b>'+country+'</b>');
                 weatherDiv.addClass('loaded');
+
+                // Carousel it
+                readySlick();
             }
 
             else {
@@ -83,9 +86,9 @@ $(function(){
 
     function addWeather(icon, day, condition){
 
-        var markup = '<li class="weather__item">'+
+        var markup = '<div>'+
             '<img src="/images/icons/'+ icon +'.png" />'+
-            ' <p class="day">'+ day +'</p> <p class="cond">'+ condition +
+            ' <p>'+ day +'</p> <p">'+ condition +
             '</p></li>';
 
         weatherDiv.append(markup);
@@ -120,3 +123,24 @@ $(function(){
     }
 
 });
+
+// Carousel it
+function readySlick() {
+    $('.slick').slick({
+        autoplay: true,
+        infinite: true,
+        speed: 300
+    });
+};
+
+function slickLowStress() {
+    // TODO
+};
+
+function slickModerateStress() {
+    $('.slick').slickFilter(':even');
+};
+
+function slickSevereStress() {
+    $('.slick').slickGoTo(0).slickPause();
+};

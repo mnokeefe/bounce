@@ -1,30 +1,42 @@
 extends layout
 
+block styles
+  link(rel='stylesheet', href='//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css')
+
 block content
-  h1= title
-  //- Username entry form
+
   form.form-group.username-form(action='')
     label Username
     input.form-control(type='text')
     input.btn.btn-primary(type='submit', value='Join')
 
   section#ui.ui
-    table.table.table-striped
-      thead
-        tr
-          th Name
-          th Location
-          th Stress
-      tbody
-        tr
-          td#username Matt
-          td
-            .location
-          td.js-stress-indicator OK
-
-    ol#weather.weather(data-stress='ok')
+    h1#username Test
+    .slick
+      div.blog-item
+        img(src='images/boardroom.jpg')
+      div.blog-item
+        img(src='images/brains.jpg')
+      div.blog-item
+        img(src='images/brian.jpg')
+      div.blog-item
+        img(src='images/bulb.jpg')
+      div.blog-item
+        img(src='images/crown.jpg')
+      div.blog-item
+        img(src='images/devices.jpg')
+      div.blog-item
+        img(src='images/lions.jpg')
+      div.blog-item
+        img(src='images/ollie.jpg')
+      div.blog-item
+        img(src='images/overtheair.jpg')
+      div.blog-item
+        img(src='images/paul.jpg')
+      div.blog-item
+        img(src='images/twitter.jpg')
 
 block scripts
-  script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js')
+  script(src='//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js')
   script(src='js/client.js')
-  script(src='js/weather.js')
+  script(src='js/blog-carousel.js')

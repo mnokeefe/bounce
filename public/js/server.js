@@ -51,19 +51,19 @@ socket.on('delete crewmember', function(data) {
 ////////////////////////////////////////////////////////////////////////////////
 
 $('body').on('click', 'button[data-stress="none"]', function () {
-  socket.emit('no stress', { name: $(this).closest('tr').data('name') });
+  socket.emit('no stress', {name: $(this).closest('tr').data('name')});
   $(this).closest('tr').attr('class', 'bg-success')
     .find('.js-status').text('OK');
 });
 
 $('body').on('click', 'button[data-stress="moderate"]', function () {
-  socket.emit('moderate stress', { name: $(this).closest('tr').data('name') });
+  socket.emit('moderate stress', {name: $(this).closest('tr').data('name')});
   $(this).closest('tr').attr('class', 'bg-warning')
     .find('.js-status').text('Moderate');
 });
 
 $('body').on('click', 'button[data-stress="severe"]', function () {
-  socket.emit('severe stress', { name: $(this).closest('tr').data('name') });
+  socket.emit('severe stress', {name: $(this).closest('tr').data('name')});
   $(this).closest('tr').attr('class', 'bg-danger')
     .find('.js-status').text('SEVERE');
 });

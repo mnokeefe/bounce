@@ -1,11 +1,6 @@
 @import 'settings';
 @import 'modules/weather';
-
-
-// Hide UI initially when using username entry form
-.ui {
-  display: none;
-}
+@import 'modules/blog';
 
 * {
   box-sizing: border-box;

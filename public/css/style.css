@@ -1,32 +1,14 @@
-.weather {
-  padding: 0;
-  margin: 0;
-  color: #ffffff; }
-
-.weather__item {
-  border: 0.5rem solid #ffffff;
-  display: inline-block;
-  padding-top: 2rem;
-  text-align: center; }
-  .weather__item img {
-    width: 80%; }
-
-[data-stress="ok"] .weather__item {
-  width: 20%;
-  background: #1b8fb4; }
-  [data-stress="ok"] .weather__item img {
-    display: none; }
-
-[data-stress="moderate"] .weather__item {
-  width: 50%;
-  background: #146d88; }
-
-[data-stress="severe"] .weather__item {
-  width: 100%;
-  background: #0e495b; }
-
 .ui {
   display: none; }
+
+.weather {
+  background: #1b8fb4;
+  color: #ffffff; }
+
+.blog-item img {
+  width: 100%;
+  margin: 0;
+  padding: 0; }
 
 * {
   -webkit-box-sizing: border-box;

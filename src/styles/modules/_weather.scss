@@ -1,40 +1,20 @@
+.ui {
+  display: none;
+}
+
 .weather {
-  padding: 0;
-  margin: 0;
+  background: $blue;
   color: $white;
 }
 
-.weather__item {
-  border: 0.5rem solid $white;
-  display: inline-block;
-  padding-top: 2rem;
-  text-align: center;
-  img {
-    width: 80%;
-  }
-}
-
-
 [data-stress="ok"] {
-  .weather__item {
-    img {
-      display: none;
-    }
-    width: 20%;
-    background: $blue;
-  }
+
 }
 
 [data-stress="moderate"] {
-  .weather__item {
-    width: 50%;
-    background: $blue-dark;
-  }
+
 }
 
 [data-stress="severe"] {
-  .weather__item {
-    width: 100%;
-    background: $blue-darkest;
-  }
+
 }

@@ -1,6 +1,16 @@
-Stress driven UI prototype
---------------------------
+# Stress driven UI prototype
 
-`gulp watch` for asset compilation.
+`npm install` then `gulp watch` for asset compilation, `node app` for the server.
 
-`node app` for the server, or use `nodemon app` if available.
+## TODO
+
+### Stress Faker
+
+1. Add currently connected clients when you connect to /server
+2. Show which experiment connected clients are viewing
+
+### Experiments to try
+
+1. Type size and colour
+2. Type to icon - i.e. HAPPY vs :)
+3. Colour based system, or LED faking

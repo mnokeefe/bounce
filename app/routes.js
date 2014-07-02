@@ -7,3 +7,8 @@ exports.index = function(req, res){
 exports.server = function(req, res){
   res.render('server', { title: 'Stress Faker' });
 };
+
+// Test
+exports.weather = function(req, res){
+  res.render('weather', { title: 'Weather tester' });
+};

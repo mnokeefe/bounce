@@ -1,16 +1,16 @@
 extends layout
 
 block content
-  h1= title
-
-  section.row
-    table#crewmembers.table
-      thead
-        tr
-          th Name
-          th Stress Level
-          th Controls
-      tbody
+  .container
+    h1= title
+    section.row
+      table#crewmembers.table
+        thead
+          tr
+            th Name
+            th Stress Level
+            th Controls
+        tbody
 
 block scripts
   script(src='js/server.js')

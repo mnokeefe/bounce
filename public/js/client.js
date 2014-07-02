@@ -19,13 +19,16 @@ $(".username-form").on("submit", function(){
 // Receive stress signals
 socket.on('no stress', function() {
   $('.js-stress-indicator').text("Everything's OK");
-  $('#weather').attr('data-stress', 'ok');
+  $('.js-client').attr('data-stress', 'ok');
+  slickLowStress(); // Call Slick's stress method
 });
 socket.on('moderate stress', function() {
   $('.js-stress-indicator').text('Alright, calm down a bit there mate');
-  $('#weather').attr('data-stress', 'moderate');
+  $('.js-client').attr('data-stress', 'ok');
+  slickModerateStress(); // Call Slick's stress method
 });
 socket.on('severe stress', function() {
   $('.js-stress-indicator').text('STRESSED! STRESSED!');
-  $('#weather').attr('data-stress', 'severe');
+  $('.js-client').attr('data-stress', 'ok');
+  slickSevereStress(); // Call Slick's stress method
 });
