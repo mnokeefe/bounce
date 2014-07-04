@@ -1,40 +1,37 @@
 extends layout
 
-block styles
-  link(rel='stylesheet', href='//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.css')
-
 block content
+  .container
+    form.form-group.username-form(action='')
+      label Username
+      input.form-control(type='text')
+      input.btn.btn-primary(type='submit', value='Join')
 
-  form.form-group.username-form(action='')
-    label Username
-    input.form-control(type='text')
-    input.btn.btn-primary(type='submit', value='Join')
-
-  section#ui.ui
-    h1#username Test
-    .slick
-      div.image-carousel-item
-        img(src='images/boardroom.jpg')
-      div.image-carousel-item
-        img(src='images/brains.jpg')
-      div.image-carousel-item
-        img(src='images/brian.jpg')
-      div.image-carousel-item
-        img(src='images/bulb.jpg')
-      div.image-carousel-item
-        img(src='images/crown.jpg')
-      div.image-carousel-item
-        img(src='images/devices.jpg')
-      div.image-carousel-item
-        img(src='images/lions.jpg')
-      div.image-carousel-item
-        img(src='images/ollie.jpg')
-      div.image-carousel-item
-        img(src='images/overtheair.jpg')
-      div.image-carousel-item
-        img(src='images/paul.jpg')
-      div.image-carousel-item
-        img(src='images/twitter.jpg')
+    section#ui.ui
+      h1#username Test
+      .slick
+        div.image-carousel-item
+          img(src='images/boardroom.jpg')
+        div.image-carousel-item
+          img(src='images/brains.jpg')
+        div.image-carousel-item
+          img(src='images/brian.jpg')
+        div.image-carousel-item
+          img(src='images/bulb.jpg')
+        div.image-carousel-item
+          img(src='images/crown.jpg')
+        div.image-carousel-item
+          img(src='images/devices.jpg')
+        div.image-carousel-item
+          img(src='images/lions.jpg')
+        div.image-carousel-item
+          img(src='images/ollie.jpg')
+        div.image-carousel-item
+          img(src='images/overtheair.jpg')
+        div.image-carousel-item
+          img(src='images/paul.jpg')
+        div.image-carousel-item
+          img(src='images/twitter.jpg')
 
 block scripts
   script(src='//cdn.jsdelivr.net/jquery.slick/1.3.6/slick.min.js')

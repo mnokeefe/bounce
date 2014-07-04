@@ -14,3 +14,4 @@
 1. Type size and colour
 2. Type to icon - i.e. HAPPY vs :)
 3. Colour based system, or LED faking
+4. [HTML5 Vibrate](http://www.simpl.info/vibrate/)

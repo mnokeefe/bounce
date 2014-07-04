@@ -31,7 +31,7 @@ var clients = {};
 
 io.on('connection', function(socket) {
 
-  // CONNECT
+  // CLIENT CONNECT
   // Add connections to the clients list
   //////////////////////////////////////////////////////////////////////////////
 
@@ -40,11 +40,18 @@ io.on('connection', function(socket) {
       'socket': socket.id
     };
 
-    io.emit('add crewmember', { name: data.username });
+    io.emit('add crewmember', data.username);
 
     console.log(data.username + ' connected');
     console.log(clients);
   });
+
+  // FAKER CONNECT
+  // TODO: separate the faker in to its own socket.io namespace
+  //////////////////////////////////////////////////////////////////////////////
+
+  var keys = Object.keys(clients);
+  io.emit('stress fake connection', keys);
 
   // DISCONNECT
   // Remove disconnected sockets from the clients list

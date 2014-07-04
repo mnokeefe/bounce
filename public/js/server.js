@@ -1,41 +1,18 @@
 var socket = io();
 
-// ADD CREW ON CONNECTION
+// ADD CONNECTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-socket.on('add crewmember', function(data) {
-  $("#crewmembers").find('tbody')
-    .append($('<tr class="bg-success">')
-      .data('name', data.name)
-      .append($('<td>')
-        .text(data.name)
-      )
-      .append($('<td class="js-status">')
-        .text('OK')
-      )
-      .append($('<td>')
-        .append($('<div class="btn-group">')
-        )
-        .append($('<button type="button" class="btn btn-default">')
-          .attr({
-            'data-stress': 'none'
-          })
-          .text('None')
-        )
-        .append($('<button type="button" class="btn btn-default">')
-          .attr({
-            'data-stress': 'moderate'
-          })
-          .text('Moderate')
-        )
-        .append($('<button type="button" class="btn btn-default">')
-          .attr({
-            'data-stress': 'severe'
-          })
-          .text('Severe')
-        )
-      )
-    );
+// TODO: Add current connections
+socket.on('stress fake connection', function(crewmember) {
+  crewmember.forEach(function(crewmember) {
+      addCrewMember(crewmember);
+  });
+});
+
+// Add new connections
+socket.on('add crewmember', function(crewmember) {
+  addCrewMember(crewmember);
 });
 
 // REMOVE CREW ON DISCONNECT
@@ -46,6 +23,44 @@ socket.on('delete crewmember', function(data) {
     return $(this).data('name') === data.name
   }).remove();
 });
+
+// Add crewmembers to DOM
+////////////////////////////////////////////////////////////////////////////////
+
+function addCrewMember(data) {
+  $("#crewmembers").find('tbody')
+  .append($('<tr class="bg-success">')
+    .data('name', data)
+    .append($('<td>')
+      .text(data)
+    )
+    .append($('<td class="js-status">')
+      .text('OK')
+    )
+    .append($('<td>')
+      .append($('<div class="btn-group">')
+      )
+      .append($('<button type="button" class="btn btn-default">')
+        .attr({
+          'data-stress': 'none'
+        })
+        .text('None')
+      )
+      .append($('<button type="button" class="btn btn-default">')
+        .attr({
+          'data-stress': 'moderate'
+        })
+        .text('Moderate')
+      )
+      .append($('<button type="button" class="btn btn-default">')
+        .attr({
+          'data-stress': 'severe'
+        })
+        .text('Severe')
+      )
+    )
+  );
+}
 
 // STRESS! STRESS!
 ////////////////////////////////////////////////////////////////////////////////
