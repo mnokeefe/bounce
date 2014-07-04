@@ -18,4 +18,5 @@ function slickModerateStress() {
 
 function slickSevereStress() {
   $('.slick').slickGoTo(0).slickPause();
+  navigator.vibrate([1000, 500, 1000, 500, 1000, 500]); // vibrate, pause...
 };
