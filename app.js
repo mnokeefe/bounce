@@ -15,11 +15,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.get('/', routes.index);
 app.get('/server', routes.server);
-app.get('/weather', routes.weather);
+app.get('/matter', routes.matter); // Temp route for testing matter.js
 
 // Server
-srv.listen(3011, function() {
-  console.log('listening on port 3011');
+srv.listen(3012, function() {
+  console.log('listening on port 3012');
 });
 
 
@@ -35,23 +35,23 @@ io.on('connection', function(socket) {
   // Add connections to the clients list
   //////////////////////////////////////////////////////////////////////////////
 
-  socket.on('add-user', function(data) {
+  socket.on('add a bouncer', function(data) {
     clients[data.username] = {
       'socket': socket.id
     };
 
-    io.emit('add crewmember', data.username);
+    io.emit('add bouncer', data.username);
 
     console.log(data.username + ' connected');
     console.log(clients);
   });
 
-  // FAKER CONNECT
-  // TODO: separate the faker in to its own socket.io namespace
+  // SERVER CONNECT
+  // TODO: separate the score board (server) in to its own socket.io namespace
   //////////////////////////////////////////////////////////////////////////////
 
   var keys = Object.keys(clients);
-  io.emit('stress fake connection', keys);
+  io.emit('add all live bouncers', keys);
 
   // DISCONNECT
   // Remove disconnected sockets from the clients list
@@ -63,7 +63,7 @@ io.on('connection', function(socket) {
         console.log(name + ' disconnected');
 
         // Delete from Stress Faker UI
-        io.emit('delete crewmember', { name: name });
+        io.emit('delete bouncer', { name: name });
 
         delete clients[name];
         break;
@@ -71,34 +71,13 @@ io.on('connection', function(socket) {
     }
   });
 
-  // STRESS! STRESS!
-  // Send messages from Stress Faker to correct connection
+  // KICK OFF!
+  // TODO: Start sending out the ball
   //////////////////////////////////////////////////////////////////////////////
 
-  socket.on('no stress', function(data) {
-    console.log(data.name + ': Low stress');
-    if (clients[data.name]) {
-      socket.to(clients[data.name].socket).emit('no stress');
-    } else {
-      console.log('User does not exist: ' + data.name); 
-    }
-  });
-
-  socket.on('moderate stress', function(data) {
-    console.log(data.name + ': Moderate stress');
-    if (clients[data.name]) {
-      socket.to(clients[data.name].socket).emit('moderate stress');
-    } else {
-      console.log('User does not exist: ' + data.name); 
-    }
-  });
-
-  socket.on('severe stress', function(data) {
-    console.log(data.name + ': High stress');
-    if (clients[data.name]) {
-      socket.to(clients[data.name].socket).emit('severe stress');
-    } else {
-      console.log('User does not exist: ' + data.name); 
-    }
+  socket.on('kick off', function() {
+    console.log('We\'re off!');
+    // TODO: send ball to random client
+    io.emit('get bomb');
   });
 });

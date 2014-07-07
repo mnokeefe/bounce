@@ -1,8 +1,9 @@
 @import 'settings';
-@import 'modules/slick';
-@import 'modules/weather';
-@import 'modules/image-carousel';
 
 * {
   box-sizing: border-box;
+}
+
+.bomb {
+  display: none;
 }

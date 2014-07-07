@@ -1,11 +1,11 @@
 {
-  "name": "stress-interface",
+  "name": "bounce",
   "version": "0.0.1",
-  "description": "stress driven interface prototype",
+  "description": "boing boing boing",
   "dependencies": {
     "express": "~4.4.3",
     "socket.io": "~1.0.5",
-    "jade": ""
+    "jade": "~1.3.1"
   },
   "devDependencies": {
     "gulp": "",

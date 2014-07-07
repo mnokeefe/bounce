@@ -1,84 +1,44 @@
 var socket = io();
 
-// ADD CONNECTIONS
+// CONNECTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Add current connections
-socket.on('stress fake connection', function(crewmember) {
-  crewmember.forEach(function(crewmember) {
-      addCrewMember(crewmember);
+// Add current connections
+socket.on('add all live bouncers', function(bouncer) {
+  bouncer.forEach(function(bouncer) {
+      addBouncerLine(bouncer);
   });
 });
 
 // Add new connections
-socket.on('add crewmember', function(crewmember) {
-  addCrewMember(crewmember);
+socket.on('add bouncer', function(bouncer) {
+  addBouncerLine(bouncer);
 });
 
-// REMOVE CREW ON DISCONNECT
-////////////////////////////////////////////////////////////////////////////////
-
-socket.on('delete crewmember', function(data) {
-  $('#crewmembers tr').filter(function(){
+// Remove bouncers on disconnect
+socket.on('delete bouncer', function(data) {
+  $('#bouncers tr').filter(function(){
     return $(this).data('name') === data.name
   }).remove();
 });
 
-// Add crewmembers to DOM
-////////////////////////////////////////////////////////////////////////////////
-
-function addCrewMember(data) {
-  $("#crewmembers").find('tbody')
-  .append($('<tr class="bg-success">')
+// Add bouncers to the table
+function addBouncerLine(data) {
+  $("#bouncers").find('tbody')
+  .append($('<tr>')
     .data('name', data)
     .append($('<td>')
       .text(data)
     )
-    .append($('<td class="js-status">')
-      .text('OK')
-    )
     .append($('<td>')
-      .append($('<div class="btn-group">')
-      )
-      .append($('<button type="button" class="btn btn-default">')
-        .attr({
-          'data-stress': 'none'
-        })
-        .text('None')
-      )
-      .append($('<button type="button" class="btn btn-default">')
-        .attr({
-          'data-stress': 'moderate'
-        })
-        .text('Moderate')
-      )
-      .append($('<button type="button" class="btn btn-default">')
-        .attr({
-          'data-stress': 'severe'
-        })
-        .text('Severe')
-      )
+      .addClass('js-bomb-active')
     )
   );
 }
 
-// STRESS! STRESS!
+// KICK OFF!
 ////////////////////////////////////////////////////////////////////////////////
 
-$('body').on('click', 'button[data-stress="none"]', function () {
-  socket.emit('no stress', {name: $(this).closest('tr').data('name')});
-  $(this).closest('tr').attr('class', 'bg-success')
-    .find('.js-status').text('OK');
-});
-
-$('body').on('click', 'button[data-stress="moderate"]', function () {
-  socket.emit('moderate stress', {name: $(this).closest('tr').data('name')});
-  $(this).closest('tr').attr('class', 'bg-warning')
-    .find('.js-status').text('Moderate');
-});
-
-$('body').on('click', 'button[data-stress="severe"]', function () {
-  socket.emit('severe stress', {name: $(this).closest('tr').data('name')});
-  $(this).closest('tr').attr('class', 'bg-danger')
-    .find('.js-status').text('SEVERE');
+$('body').on('click', 'button', function () {
+  socket.emit('kick off');
 });
