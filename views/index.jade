@@ -5,13 +5,13 @@ block content
     form.form-group.username-form(action='')
       label Name
       input.form-control(type='text')
-      input.btn(type='submit', value='Join')
+      input.btn(id='bomb-start', type='submit', value='Join')
 
     section#ui.ui
-      h1#username Bouncer
-      img(src='/images/bomb.png').js-bomb.bomb
-
-
+      //- h1#username Bouncer
+      #canvas-container
 
 block scripts
+  script(src='js/lib/matter-0.8.0.js')
+  script(src='js/bomb.js')
   script(src='js/client.js')

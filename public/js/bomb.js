@@ -61,24 +61,26 @@
         Bomb.reset();
 
         World.add(_world, MouseConstraint.create(_engine));
-        
-        // TODO: Rewrite this using Composite if it's only ever one bomb at a time
-        var stack = Composites.stack(20, 20, 1, 1, 0, 0, function(x, y, column, row) {
 
-            // TODO: Get the bomb texture from Jon
-            var texture = 'http://images.neopets.com/items/pteri_bomb.gif';
-            return Bodies.circle (x, y, 80, {
+        // Add a bomb
+        function addBomb() {
+            var bombDropPosition = _sceneWidth * Math.random();
+            var bomb = Bodies.circle (bombDropPosition, 20, 60, {
                 friction: 0.01,
                 restitution: 0.9,
                 render: {
-                    sprite: {
-                        texture: texture
-                    }
+                    strokeStyle: '#777'
+                    // sprite: {
+                    //     texture: 'http://images.neopets.com/items/pteri_bomb.gif' // TODO: Get the bomb texture from JonD
+                    // }
                 }
             }, 40)
-        });
-        
-        World.add(_world, stack);
+            World.add(_world, bomb);
+        };
+        // World.add(_world, bomb);
+
+        // Expose the bomb creation for sockets to use
+        window.addBomb = addBomb;
     };
     
     Bomb.updateScene = function() {
@@ -148,10 +150,9 @@
         var offset = 5;
 
         // The boundaries
-        World.addBody(_world, Bodies.rectangle(_sceneWidth * 0.5, -offset, _sceneWidth + 0.5, 50.5, { isStatic: true, density: 0 }));  // Top
+        World.addBody(_world, Bodies.rectangle(_sceneWidth * 0.5, -offset, _sceneWidth + 0.5, 50.5, { isStatic: true }));  // Top
         World.addBody(_world, Bodies.rectangle(_sceneWidth * 0.5, _sceneHeight + offset, _sceneWidth + 0.5, 50.5, { isStatic: true }));
         World.addBody(_world, Bodies.rectangle(_sceneWidth + offset, _sceneHeight * 0.5, 50.5, _sceneHeight + 0.5, { isStatic: true }));
         World.addBody(_world, Bodies.rectangle(-offset, _sceneHeight * 0.5, 50.5, _sceneHeight + 0.5, { isStatic: true }));
     };
-
 })();

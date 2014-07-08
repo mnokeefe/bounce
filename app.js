@@ -75,7 +75,7 @@ io.on('connection', function(socket) {
   // TODO: Start sending out the ball
   //////////////////////////////////////////////////////////////////////////////
 
-  socket.on('kick off', function() {
+  socket.on('drop the bomb', function() {
     console.log('We\'re off!');
     // TODO: send ball to random client
     io.emit('get bomb');

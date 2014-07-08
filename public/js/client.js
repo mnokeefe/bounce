@@ -18,5 +18,6 @@ $(".username-form").on("submit", function(){
 
 // Receive the bomb
 socket.on('get bomb', function() {
-  $('.js-bomb').show();
+  console.log('got a bomb');
+  addBomb();
 });

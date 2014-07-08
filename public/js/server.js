@@ -36,9 +36,9 @@ function addBouncerLine(data) {
   );
 }
 
-// KICK OFF!
+// WESTWOOD, WESTSIDE.
 ////////////////////////////////////////////////////////////////////////////////
 
 $('body').on('click', 'button', function () {
-  socket.emit('kick off');
+  socket.emit('drop the bomb');
 });
