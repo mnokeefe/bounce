@@ -1,6 +1,4 @@
-// var socket = io('/crew');
 var socket = io();
-var stress_ui = $("#ui");
 
 // Add a username
 $(".username-form").on("submit", function(){
@@ -11,13 +9,21 @@ $(".username-form").on("submit", function(){
 
   // Remove the login form and show UI
   $(this).remove();
-  $("#username").text(username);
-  stress_ui.show();
+  $("#ui").show();
   return false;
 });
 
 // Receive the bomb
 socket.on('get bomb', function() {
-  console.log('got a bomb');
   addBomb();
 });
+
+// Pass the bomb
+function passTheBomb() {
+  socket.emit('pass the bomb');
+}
+
+// Blow up
+function explode() {
+  socket.emit('KABOOM');
+}

@@ -42,3 +42,16 @@ function addBouncerLine(data) {
 $('body').on('click', 'button', function () {
   socket.emit('drop the bomb');
 });
+
+// Messages from client
+////////////////////////////////////////////////////////////////////////////////
+
+// Receive the bomb
+socket.on('pass the bomb', function() {
+  console.log('client passed the bomb');
+});
+
+// Receive the bomb
+socket.on('pass the bomb', function() {
+  console.log('client blew up');
+});

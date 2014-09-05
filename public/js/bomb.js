@@ -14,6 +14,7 @@
         Events = Matter.Events;
 
     var Bomb = {};
+    var socket = io(); // DEBUG
 
     var _engine,
         _sceneName = 'game',
@@ -85,7 +86,9 @@
                 // If bomb hits the roof
                 if (pair.bodyA.groupId == 1) {
                     Composite.removeBody(_world, pair.bodyB);
-                    console.log('roof collision');
+
+                    // TODO: Send the message
+                    passTheBomb();
                 // Or if it hits the floor increase the bounce count
                 } else if (pair.bodyA.groupId == 2) {
                     bounces = bounces + 1;
@@ -93,8 +96,11 @@
 
                 // Bounced three times
                 if (bounces > 3) {
-                    console.log('explode!')
+                    console.log('TODO: Handle the explosion here')
                     Composite.removeBody(_world, pair.bodyB);
+
+                    // TODO: Send the message
+                    explode();
                 }
             }
         });
