@@ -10,14 +10,16 @@
         Composites = Matter.Composites,
         Common = Matter.Common,
         Constraint = Matter.Constraint,
-        MouseConstraint = Matter.MouseConstraint;
+        MouseConstraint = Matter.MouseConstraint,
+        Events = Matter.Events;
 
     var Bomb = {};
 
     var _engine,
-        _sceneName = 'mixed',
+        _sceneName = 'game',
         _sceneWidth,
-        _sceneHeight;
+        _sceneHeight,
+        bounces;
 
     Bomb.init = function() {
         var canvasContainer = document.getElementById('canvas-container'),
@@ -43,7 +45,7 @@
                 Bomb.updateScene();
             }, 800);
         });
-        
+
         window.addEventListener('deviceorientation', Bomb.updateGravity, true);
         window.addEventListener('touchstart', Bomb.fullscreen);
         window.addEventListener('orientationchange', function() {
@@ -52,37 +54,53 @@
             Bomb.fullscreen();
         }, false);
     };
-
     window.addEventListener('load', Bomb.init);
 
-    Bomb.mixed = function() {
+    // START THE MEAT OF IT ////////////////////////////////////////////////////
+    Bomb.game = function() {
         var _world = _engine.world;
-        
         Bomb.reset();
-
         World.add(_world, MouseConstraint.create(_engine));
 
         // Add a bomb
         function addBomb() {
             var bombDropPosition = _sceneWidth * Math.random();
-            var bomb = Bodies.circle (bombDropPosition, 20, 60, {
-                friction: 0.01,
-                restitution: 0.9,
-                render: {
-                    strokeStyle: '#777'
-                    // sprite: {
-                    //     texture: 'http://images.neopets.com/items/pteri_bomb.gif' // TODO: Get the bomb texture from JonD
-                    // }
-                }
+            var bomb = Bodies.circle(bombDropPosition, 50, 60, {
+                    friction: 0.01,
+                    restitution: 0.9
             }, 40)
-            World.add(_world, bomb);
+            bounces = 0; // reset the bounce count
+            World.addBody(_world, bomb);
+            window.bomb = bomb; // expose it
         };
-        // World.add(_world, bomb);
+        window.addBomb = addBomb; // Expose the bomb creation for sockets to use
 
-        // Expose the bomb creation for sockets to use
-        window.addBomb = addBomb;
+        Events.on(_engine, 'collisionStart', function(event) {
+            var pairs = event.pairs;
+
+            // Detect game events
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i];
+
+                // If bomb hits the roof
+                if (pair.bodyA.groupId == 1) {
+                    Composite.removeBody(_world, pair.bodyB);
+                    console.log('roof collision');
+                // Or if it hits the floor increase the bounce count
+                } else if (pair.bodyA.groupId == 2) {
+                    bounces = bounces + 1;
+                }
+
+                // Bounced three times
+                if (bounces > 3) {
+                    console.log('explode!')
+                    Composite.removeBody(_world, pair.bodyB);
+                }
+            }
+        });
     };
-    
+    // END /////////////////////////////////////////////////////////////////////
+
     Bomb.updateScene = function() {
         if (!_engine)
             return;
@@ -149,10 +167,25 @@
         
         var offset = 5;
 
-        // The boundaries
-        World.addBody(_world, Bodies.rectangle(_sceneWidth * 0.5, -offset, _sceneWidth + 0.5, 50.5, { isStatic: true }));  // Top
-        World.addBody(_world, Bodies.rectangle(_sceneWidth * 0.5, _sceneHeight + offset, _sceneWidth + 0.5, 50.5, { isStatic: true }));
-        World.addBody(_world, Bodies.rectangle(_sceneWidth + offset, _sceneHeight * 0.5, 50.5, _sceneHeight + 0.5, { isStatic: true }));
-        World.addBody(_world, Bodies.rectangle(-offset, _sceneHeight * 0.5, 50.5, _sceneHeight + 0.5, { isStatic: true }));
+        // Roof
+        World.addBody(_world, Bodies.rectangle(_sceneWidth * 0.5, -200, _sceneWidth + 0.5, 20.5, { 
+            density: 0,
+            groupId: 1, // Sky group
+            isStatic: true,
+            render: { 
+                fillStyle: '#edc51e', 
+                strokeStyle: '#b5a91c' 
+            } 
+        }));
+        // Floor
+        // id = 4
+        World.addBody(_world, Bodies.rectangle(_sceneWidth * 0.5, _sceneHeight + offset, _sceneWidth + 0.5, 50.5, {
+            groupId: 2, // Floor group
+            isStatic: true
+        }));
+        // Walls
+        // Left wall id = 6
+        World.addBody(_world, Bodies.rectangle(_sceneWidth + offset, _sceneHeight * 0.5, 50.5, _sceneHeight + 200.5, { isStatic: true }));
+        World.addBody(_world, Bodies.rectangle(-offset, _sceneHeight * 0.5, 50.5, _sceneHeight + 200.5, { isStatic: true }));
     };
 })();
