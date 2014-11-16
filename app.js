@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.get('/', routes.index);
-app.get('/server', routes.server);
+app.get('/scoreboard', routes.scoreboard);
 app.get('/matter', routes.matter); // Temp route for testing matter.js
 
 // Server
@@ -29,34 +29,37 @@ srv.listen(3012, function() {
 // Create client list
 var clients = {};
 
+// TODO: Get a random client
+function randomClient() {
+  var objectLength = Object.keys(clients).length;
+  var random = Math.floor(Math.random()*objectLength);
+  var selected = clients[random];
+  console.log(selected);
+  return selected;
+}
+
 io.on('connection', function(socket) {
 
-  // CLIENT CONNECT
   // Add connections to the clients list
-  //////////////////////////////////////////////////////////////////////////////
-
   socket.on('add a bouncer', function(data) {
     clients[data.username] = {
       'socket': socket.id
     };
-
-    io.emit('add bouncer', data.username);
-
     console.log(data.username + ' connected');
-    console.log(clients);
+
+    // *****DEBUG
+    console.log('client:' + randomClient());
+
+    // Add to scoreboard
+    io.emit('add bouncer', data.username);
   });
 
-  // SERVER CONNECT
-  // TODO: separate the score board (server) in to its own socket.io namespace
-  //////////////////////////////////////////////////////////////////////////////
-
+  // Scoreboard connection
+  // TODO: separate the score board in to its own socket.io namespace
   var keys = Object.keys(clients);
   io.emit('add all live bouncers', keys);
 
-  // DISCONNECT
   // Remove disconnected sockets from the clients list
-  //////////////////////////////////////////////////////////////////////////////
-
   socket.on('disconnect', function() {
     for(var name in clients) {
       if(clients[name].socket === socket.id) {
@@ -72,12 +75,15 @@ io.on('connection', function(socket) {
   });
 
   // KICK OFF!
-  // TODO: Start sending out the ball
-  //////////////////////////////////////////////////////////////////////////////
-
   socket.on('drop the bomb', function() {
     console.log('We\'re off!');
-    // TODO: send ball to random client
+    // TODO: send ball to random client, at the moment it sends to all
     io.emit('get bomb');
+  });
+
+  // Pass the bomb
+  socket.on('pass the bomb', function() {
+    console.log('Pass it');
+    // TODO: send ball to random client
   });
 });

@@ -20,6 +20,7 @@ socket.on('get bomb', function() {
 
 // Pass the bomb
 function passTheBomb() {
+  console.log('pass the bomb');
   socket.emit('pass the bomb');
 }
 

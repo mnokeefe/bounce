@@ -3,9 +3,9 @@ exports.index = function(req, res){
   res.render('index', { title: 'Bouncer' });
 };
 
-// Server
-exports.server = function(req, res){
-  res.render('server', { title: 'Active Bouncers' });
+// Score Board
+exports.scoreboard = function(req, res){
+  res.render('scoreboard', { title: 'Active Bouncers' });
 };
 
 // Matter.js test
