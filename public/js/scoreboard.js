@@ -50,3 +50,14 @@ socket.on('pass the bomb', function() {
 // socket.on('bomb exploded', function() {
 //   console.log('client blew up... oops!');
 // });
+
+
+
+
+
+// new
+var allUsers = document.getElementById("users");
+
+socket.on('users', function (data) {
+  allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
+});
