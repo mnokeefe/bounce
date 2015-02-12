@@ -1,6 +1,6 @@
 # BOING! BOING!
 
-`npm install` then `gulp watch` for asset compilation, `node app` for the server.
+`npm install` then `gulp watch` for asset compilation and development, `node app` for the server.
 
 ## TODO
 

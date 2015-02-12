@@ -18,7 +18,7 @@ socket.on('add bouncer', function(bouncer) {
 // Remove bouncers on disconnect
 socket.on('delete bouncer', function(data) {
   $('#bouncers tr').filter(function(){
-    return $(this).data('name') === data.name
+    return $(this).data('name') === data.name;
   }).remove();
 });
 

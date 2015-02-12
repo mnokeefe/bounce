@@ -9,18 +9,19 @@
   },
   "devDependencies": {
     "gulp": "",
-    "gulp-sass": "",
-    "gulp-pixrem": "",
     "gulp-autoprefixer": "",
-    "gulp-minify-css": "",
-    "gulp-jshint": "",
-    "gulp-imagemin": "",
-    "gulp-rename": "",
+    "gulp-cache": "",
     "gulp-clean": "",
     "gulp-concat": "",
+    "gulp-imagemin": "",
+    "gulp-jshint": "",
+    "gulp-livereload": "^3.7.0",
+    "gulp-minify-css": "",
+    "gulp-nodemon": "^1.0.5",
     "gulp-notify": "",
-    "gulp-cache": "",
-    "gulp-livereload": "",
+    "gulp-pixrem": "",
+    "gulp-rename": "",
+    "gulp-sass": "",
     "gulp-uglify": ""
   }
 }

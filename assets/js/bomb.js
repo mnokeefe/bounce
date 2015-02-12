@@ -69,11 +69,11 @@
             var bomb = Bodies.circle(bombDropPosition, 50, 60, {
                     friction: 0.01,
                     restitution: 0.9
-            }, 40)
+            }, 40);
             bounces = 0; // reset the bounce count
             World.addBody(_world, bomb);
             window.bomb = bomb; // expose it
-        };
+        }
         window.addBomb = addBomb; // Expose the bomb creation for sockets to use
 
         Events.on(_engine, 'collisionStart', function(event) {
@@ -84,19 +84,19 @@
                 var pair = pairs[i];
 
                 // If bomb hits the roof
-                if (pair.bodyA.groupId == 1) {
+                if (pair.bodyA.groupId === 1) {
                     Composite.removeBody(_world, pair.bodyB);
 
                     // TODO: Send the message
                     passTheBomb();
                 // Or if it hits the floor increase the bounce count
-                } else if (pair.bodyA.groupId == 2) {
+                } else if (pair.bodyA.groupId === 2) {
                     bounces = bounces + 1;
                 }
 
                 // Bounced three times
                 if (bounces > 3) {
-                    console.log('TODO: Handle the explosion here')
+                    console.log('TODO: Handle the explosion here');
                     Composite.removeBody(_world, pair.bodyB);
 
                     // TODO: Send the message

@@ -10,7 +10,7 @@ var routes = require('./app/routes');
 // All environments
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 // Routes
 app.get('/', routes.index);
